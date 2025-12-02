@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Log-in </title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Font Awesome 5 Brands:wght@400&display=swap" />
+
+</head>
+<body>
+    <div class="signup-login">
+        <div class="signup-box">
+            <form  method="post">
+                {% csrf_token %}
+                <div class="heading">
+                    Log-in
+                </div>
+                <div class="line"></div>
+                <div class="field">
+                    <b> Username</b>
+                    <input type="text" name = 'fnm' class = 'inp' required placeholder="Enter your Username ">
+                </div>
+                <div class="field"> 
+                    <b>Password</b>
+                    <input type="password" class="inp" name = "pwd" required placeholder="Enter your password">
+                </div>
+                <div class="field">
+                    <input type="submit" class="submit-button" value="Signup">
+                </div>
+                <div class="line"></div>
+                <div class="field">
+                    <b style="margin-left:130px">Don't Have an Account </b>
+                    <br>
+                    <a class="anc" href="/signin">Sign-up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
