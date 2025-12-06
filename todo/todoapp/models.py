@@ -6,4 +6,7 @@ class Todo(models.Model):
     srno = models.AutoField(primary_key=True,auto_created=True)
     title = models.CharField( max_length=50)
     date = models.DateField(auto_now_add=True)
+    status = models.BooleanField(default = False,blank = True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+

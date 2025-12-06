@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Todo</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="https://kit.fontawesome.com/cb792c0850.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="signup-login">
+        <div class="signup-box scr">
+            <div class="heading">Edit Task</div>
+
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- THIS WILL SHOW YOUR EXISTING TITLE -->
+                <input type="text" 
+                       name="title" 
+                       required 
+                       class="todo-input inp"
+                       value="{{ obj.title }}"
+                >
+
+                <!-- Hidden SRNO -->
+                <input type="hidden" name="srno" value="{{ obj.srno }}">
+
+                <input class="submit-button" type="submit" value="Update Task">
+            </form>
+
+            <!-- Show all todos -->
+            {% for todo in res %}
+                <div class="Todo clickable-div {% if todo.status %}todo-green{% else %}todo-red{% endif %}">
+                    <h5>{{ todo.srno }}</h5>
+                    <p>{{ todo.title }}</p>
+
+                    <div>
+                        <a href="/edit_todo/{{ todo.srno }}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="/delete_todo/{{ todo.srno }}">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <script src="{% static 'js/todo.js' %}"></script>
+</body>
+
+</html>

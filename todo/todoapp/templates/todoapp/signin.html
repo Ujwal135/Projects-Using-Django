@@ -14,6 +14,7 @@
 <body>
     <div class="signup-login">
         <div class="signup-box">
+            {% block body %}
             <form  method="post">
                 {% csrf_token %}
                 <div class="heading">
@@ -41,8 +42,11 @@
                     <br>
                     <a class="anc" href="/login">Login</a>
                 </div>
+
             </form>
+            {% endblock %}
         </div>
+
     </div>
 </body>
 </html>
