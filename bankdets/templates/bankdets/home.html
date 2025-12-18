@@ -1,0 +1,49 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Django Tailwind</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+    {% tailwind_css %}
+</head>
+<body style="font-family: 'Unbounded', sans-serif" class='bg-black text-amber-50 font-brand'>
+    <header class=' w-full'>
+        <nav class = "flex w-full items-center justify-between px-6 py-4 ">
+            <div class='my-1 mx-1'>
+                    <a href="#" class='text-3xl font-bold text-blue-800'>SuperCharge.</a>
+            </div>
+
+            <ul class="flex gap-6 font-bold ">
+                <li><a href="" class="hover:text-blue-700">Home</a></li>
+                <li><a href="" class="hover:text-blue-700">About-us</a></li>
+                <li><a href="" class="hover:text-blue-700">Banking</a></li>
+                <li><a href="" class="hover:text-blue-700">Contact-us</a></li>
+                <li><a href="" class="hover:text-blue-700">Explore</a></li>
+            </ul>
+
+            <ul class="flex gap-3.5 font-bold ">
+                <li><a href="" class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-amber-50 hover:text-black transition">Login</a></li>
+                <li><a class="px-4 py-1.5 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition" href="">Sign-up</a></li>
+            </ul>
+        </nav>
+    </header>
+<main>
+    <div class="mt-19 px-6 text-center">
+      <div class="text-center">
+        <h1 class="text-6xl font-bold mb-4">Welcome to</h1>
+        <h2 class="text-6xl font-bold text-blue-800">SuperCharge Finance</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          All your financial services in one smart platform.
+        </p>
+      </div>
+    </div>
+</main>
+</body>
+</html>
+    
