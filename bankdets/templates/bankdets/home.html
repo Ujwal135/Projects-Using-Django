@@ -34,15 +34,81 @@
         </nav>
     </header>
 <main>
-    <div class="mt-19 px-6 text-center">
+
+    <div class="mt-20 px-6 text-center">
       <div class="text-center">
-        <h1 class="text-6xl font-bold mb-4">Welcome to</h1>
-        <h2 class="text-6xl font-bold text-blue-800">SuperCharge Finance</h2>
-        <p class="mt-4 text-lg text-gray-600">
+        <h1 class="text-6xl font-bold mb-4 transition-all duration-700 opacity-0 animate-[fadeIn_1s_ease-out_forwards]">
+          Welcome to
+        </h1>
+
+        <h2 class="text-6xl font-bold text-blue-800 transition-all duration-700 opacity-0 animate-[fadeIn_1.2s_ease-out_forwards]">
+          SuperCharge Finance
+        </h2>
+
+        <p class="mt-4 text-lg text-gray-600 transition-all duration-700 opacity-0 animate-[fadeIn_1.4s_ease-out_forwards]">
           All your financial services in one smart platform.
         </p>
       </div>
     </div>
+
+
+    <div class=' mt-16 w-6xl justify-self-center border border-gray-600 p-4 rounded-md text-gray-600 transition-all duration-700 opacity-0 animate-[fadeIn_1.4s_ease-out_forwards]'>
+        <h2 class="text-3xl font-bold text-center mb-6">
+            Why Choose SuperCharge..
+        </h2>
+        <p class="text-center text-gray-600 text-lg max-w-3xl mx-auto">
+        We provide secure, fast, and customer-focused banking solutions designed
+        to make your financial life simple and stress-free.
+        </p>
+    </div>
+
+    <div class="justify-self-center transition-all duration-700 opacity-0 animate-[fadeIn_1.4s_ease-out_forwards]">
+        <h1 class=" text-5xl mt-10"> Explore Our Services </h1>
+
+    </div>
+  <div class="max-w-7xl mx-auto mt-16 px-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 place-items-center">
+
+        {% for service in services %}
+
+      <div class="group w-80 h-64 border rounded-xl p-6 text-center
+       flex flex-col justify-between transition-all duration-300
+        hover:shadow-xl hover:-translate-y-2 hover:border-blue-600 animate-fadeUp"
+        style="animation-delay: {{ service.delay }}s;" >
+
+      <!-- Icon -->
+      <div class="flex justify-center">
+        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full
+                    flex items-center justify-center text-2xl font-bold">
+          {{ service.icon|default:"₹" }}
+        </div>
+      </div>
+
+      <!-- Title -->
+      <h3 class="text-xl font-semibold mt-4">
+        {{ service.title }}
+      </h3>
+
+      <!-- Description -->
+      <p class="text-gray-600 text-sm mt-2">
+        {{ service.desc }}
+      </p>
+
+      <!-- CTA -->
+      <a
+        href="#"
+        class="text-blue-600 font-medium mt-4 inline-block
+               group-hover:underline">
+        Learn More →
+      </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+  </div>
+   
 </main>
 </body>
 </html>
