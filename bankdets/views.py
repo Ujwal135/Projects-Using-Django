@@ -5,12 +5,12 @@ from django.shortcuts import render
     
 def home(request):
     services = [
-        {"title": "Accounts", "desc": "Safe and secure savings", "icon": "💰"},
-        {"title": "Loans", "desc": "Quick loan approvals", "icon": "🏦"},
-        {"title": "Cards", "desc": "Debit and credit cards", "icon": "💳"},
-        {"title": "Insurance", "desc": "Life & health coverage", "icon": "🛡️"},
-        {"title": "Investments", "desc": "Grow your wealth", "icon": "📈"},
-        {"title": "Support", "desc": "24×7 customer support", "icon": "☎️"},
+        {"title": "Accounts", "desc": "Open your Saving account at 0 balance", "icon": "💰","name":'account'},
+        {"title": "Loans", "desc": "Quick loan approvals", "icon": "🏦","name":'loan'},
+        {"title": "Cards", "desc": "Debit and credit cards", "icon": "💳","name":'cards'},
+        {"title": "Insurance", "desc": "Life & health coverage", "icon": "🛡️","name":'insurance'},
+        {"title": "Investments", "desc": "Grow your wealth", "icon": "📈","name":'investments'},
+        {"title": "Support", "desc": "24×7 customer support", "icon": "☎️","name":'support'},
     ]
 
     # Add staggered animation delay
@@ -19,3 +19,21 @@ def home(request):
 
     
     return render (request,'bankdets/home.html',{'services':services})
+
+def account(request):
+    return render(request,'bankdets/account.html')
+
+def loan(request):
+    return render(request,'bankdets/account.html')
+
+def cards(request):
+    return render(request,'bankdets/account.html')
+
+def insurance(request):
+    return render(request,'bankdets/account.html')
+
+def investments(request):
+    return render(request,'bankdets/account.html')
+
+def support(request):
+    return render(request,'bankdets/account.html')

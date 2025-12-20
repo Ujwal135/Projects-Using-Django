@@ -24,7 +24,7 @@
 
     {% tailwind_css %}
 </head>
-<body style="font-family: 'Unbounded', sans-serif" class='bg-black text-amber-50 font-brand scroll-smooth'>
+<body style="font-family: 'Unbounded', sans-serif" class='bg-black text-amber-50 font-brand scroll-smooth '>
     <header class=' w-full'>
         <nav class = "flex w-full items-center justify-between px-6 py-4 ">
             <div class='my-1 mx-1'>
@@ -108,7 +108,7 @@
 
       <!-- CTA -->
       <a
-        href="#"
+        href= "{% url service.name %}"
         class="text-blue-600 font-medium mt-4 inline-block
                group-hover:underline">
         Learn More →
@@ -207,6 +207,7 @@
       </a>
     </div>
   </div>
+  
 </footer>
 </main>
 </body>
