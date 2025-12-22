@@ -12,3 +12,4 @@ urlpatterns = [
     path('investments/',views.investments,name='investments')
 ]
 
+

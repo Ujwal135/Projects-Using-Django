@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bankdets',
     'tailwind' ,
     'theme',
+    'accounts',
 ]
 
 TAILWIND_APP_NAME = 'theme'
