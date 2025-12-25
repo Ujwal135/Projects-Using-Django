@@ -59,96 +59,76 @@
 
   </div>
 </nav>
-    </header>
-<main>
-<section class="bg-gray-800/50 ">
-  <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
-    
-    <!-- Left Content -->
-    <div class="md:w-1/2">
-     <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#3b82f6] mb-6">
-      Saving Account
-    </h1>
-      <p class="text-lg text-[#94a3b8] mb-6">
-        Secure your money and grow it over time with our Saving Account. Enjoy competitive interest rates, easy online banking, and convenient withdrawals anytime.
-      </p>
-      <ul class="list-disc list-inside text-[#94a3b8] space-y-2 mb-6">
-        <li>Minimum balance requirement: ₹1,000</li>
-        <li>Interest rate: 4% per annum</li>
-        <li>Free debit card & online banking</li>
-        <li>Access to 24/7 ATMs</li>
-      </ul>
-    
-    </div>
-    
-    <!-- Right Image or Illustration -->
-    <div class="md:w-1/2 flex justify-center">
-      <img src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Saving Account" class="rounded-xl shadow-lg">
-    </div>
+</header>
 
-  </div>
-</section>
-
-<section class="flex justify-center py-12 bg-slate-900 px-4">
-  <div class="max-w-xl w-full bg-slate-800 rounded-2xl shadow-xl p-8 border border-slate-700">
+<section class="min-h-screen flex items-center justify-center bg-slate-900 px-4 py-12">
+  <div class="max-w-3xl w-full bg-slate-800 rounded-2xl shadow-xl p-8 border border-slate-700">
 
     <!-- Success Icon -->
     <div class="flex justify-center mb-6">
-      <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center">
-        <svg class="w-8 h-8 text-[#3b82f6]" fill="none" stroke="currentColor" stroke-width="2"
-          viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M5 13l4 4L19 7"></path>
+      <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
     </div>
 
     <!-- Title -->
-    <h2 class="text-2xl font-bold text-center text-white">
-      Registration Successful 🎉
+    <h2 class="text-2xl font-bold text-center text-slate-100">
+      Account Created Successfully 🎉
     </h2>
 
-    <p class="text-center text-slate-300 mt-2">
-      Your customer profile has been created successfully.
+    <p class="text-center text-slate-400 mt-2">
+      Your bank account has been successfully created.
     </p>
 
-    <!-- Customer Summary -->
-    <div class="mt-6 rounded-xl p-4 bg-slate-900 border border-slate-700">
-      <h3 class="text-lg font-semibold text-indigo-400 mb-3">
-        Customer Details
-      </h3>
+    <!-- Account Summary -->
+    <div class="mt-6 border rounded-xl p-6 bg-slate-900 border-slate-700">
+      <h3 class="text-lg font-semibold text-slate-200 mb-4">Account Details</h3>
 
-      <div class="space-y-2 text-sm text-slate-300">
-        <p><b class="text-slate-200">Name:</b> {{ customer.first_name }} {{ customer.last_name }}</p>
-        <p><b class="text-slate-200">Customer ID:</b> {{ customer.customer_id }}</p>
-        <p><b class="text-slate-200">Mobile:</b> {{ customer.mobile }}</p>
-        <p><b class="text-slate-200">Email:</b> {{ customer.email_id }}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-400">
+        <p>
+          <span class="text-slate-100 font-medium">Account Holder:</span>
+          {{ customer.first_name }} {{ customer.last_name }}
+        </p>
+        <p>
+          <span class="text-slate-100 font-medium">Customer ID:</span>
+          {{ customer.customer_id }}
+        </p>
+        <p>
+          <span class="text-slate-100 font-medium">Account Number:</span>
+          {{ account.account_number }}
+        </p>
+        <p>
+          <span class="text-slate-100 font-medium">Account Type:</span>
+          {{ account.get_account_type_display }}
+        </p>
+        <p>
+          <span class="text-slate-100 font-medium">Balance:</span>
+          ₹{{ account.balance }}
+        </p>
+        <p>
+          <span class="text-slate-100 font-medium">Created On:</span>
+          {{ account.created_at|date:"d M Y" }}
+        </p>
       </div>
     </div>
 
-    <!-- Info Message -->
-    <div class="mt-6 text-sm text-slate-400 text-center">
-      Next, you can proceed to open your bank account.
+    <!-- Next Actions -->
+    <div class="mt-6 flex flex-col sm:flex-row justify-between gap-4">
+      <a href="#"
+         class="px-6 py-2 bg-indigo-600 text-white rounded-lg text-center hover:bg-indigo-700">
+        Go to Dashboard
+      </a>
+
+      <a href="{% url 'open_account' %}"
+         class="px-6 py-2 border border-slate-600 text-slate-300 rounded-lg text-center hover:bg-slate-700">
+        Create Another Account
+      </a>
     </div>
 
-    <!-- Actions -->
-
-<form method="POST">
-  {% csrf_token %}
-
-  <button type="submit"
-          name="confirm"
-          class="px-6 py-2 bg-indigo-600 text-white rounded-lg">
-    Confirm & Continue
-  </button>
-
-  <a href="{% url 'open_account' %}"
-     class="ml-4 text-gray-500">
-    Edit Details
-  </a>
-</form>
+  </div>
 </section>
-
 
 <footer class=" mt-24">
   <div class="flex flex-col md:flex-row items-center justify-between gap-6 px-6 py-4 max-w-6xl mx-auto text-center md:text-left">
@@ -184,7 +164,5 @@
   
 </footer>
 
-</main>
-</body>
-</html>
-    
+
+

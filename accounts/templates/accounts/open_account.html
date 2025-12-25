@@ -192,52 +192,7 @@
     </button>
 
   </div>
-</form>
-
-{% if show_popup %}
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-gray-500 rounded-xl shadow-lg w-full max-w-md p-6">
-
-        <h2 class="text-xl font-semibold mb-4 text-center">
-            Confirm Customer Details
-        </h2>
-
-        <div class="space-y-2 text-gray-700">
-            <p><b>Customer ID:</b> {{ customer.customer_id }}</p>
-            <p><b>Name:</b> {{ customer.first_name}}  {{customer.last_name }}</p>
-            <p><b>Mobile:</b> {{ customer.mobile }}</p>
-            <p><b>DOB:</b> {{ customer.date_of_birth }}</p>
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex justify-end gap-4 mt-6">
-
-            <!-- EDIT -->
-             <button> <a href="{% url 'saving_account' %}"
-              class="px-4 py-2 rounded-lg border border-gray-400 text-gray-600 hover:bg-gray-100">
-              Edit
-             </a>
-             </button>
-          
-            <!-- CONFIRM -->
-            <button>
-            <a href="{% url 'open_account' customer.customer_id %}"
-               class="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700">
-                Confirm
-            </a>
-            </button>
-
-        </div>
-    </div>
-</div>
-{% endif %}
-
-</div>
- </section>
-
-
-  <!-- Account Form Section -->
-  
+</form>  
 
 </section>
 

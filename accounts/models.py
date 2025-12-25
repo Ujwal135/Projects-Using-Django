@@ -24,16 +24,16 @@ class Customer_information(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.customer_id:
-        
+            
             last_customer = Customer_information.objects.order_by('-id').first()
-    
-            if last_customer:
-                last_number = int(last_customer.customer_id[4:])
+
+            if last_customer and last_customer.customer_id:
+                last_number = int(last_customer.customer_id.replace('SUPR', ''))
                 next_number = last_number + 1
             else:
                 next_number = 1
     
-            self.customer_id = "SUPR" + str(next_number).zfill(6)
+            self.customer_id = f"SUPR{str(next_number).zfill(6)}"
     
         super().save(*args, **kwargs)   
         
@@ -45,18 +45,23 @@ class Customer_information(models.Model):
 # create new inharitance .
 
 class Account(models.Model):
+    class ACCOUNTTYPE(models.TextChoices):
+        SAVINGS = 'savings', 'Savings'
+        CURRENT = 'current', 'Current'
+        
     
     customer = models.ForeignKey(Customer_information,
                                  on_delete=models.CASCADE,
                                  related_name='accounts')
-    account_type = (
-                    ('SAVING','Saving account'),
-                    ('CURRENT', 'Current Account'),
-                    )
     account_number = models.CharField(max_length=20,editable=False,unique=True)
+    account_type = models.CharField(max_length=25,choices=ACCOUNTTYPE,default=ACCOUNTTYPE.SAVINGS)
     balance = models.DecimalField(max_digits=12,decimal_places=2,default=0)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    
+    def __str__(self):
+        return f"{self.customer.first_name}  {self.customer.last_name} - {self.account_number}"
     
     def save(self,*args, **kwargs):
         if not self.account_number:
@@ -65,15 +70,11 @@ class Account(models.Model):
         super().save(*args,**kwargs)
 
     def uniqueid_function(self):
-        
-        actype = 'SAV' if self.account_type == 'SAVING' else 'CUR'  
-
+        actype = 'SAV' if self.account_type == Account.ACCOUNTTYPE.SAVINGS else 'CUR'
         fixedstr = 'SUPR'
-        
         unique_part = self.uuid_numeric_4()
-               
-        return f'{actype}+{fixedstr}+{unique_part}'  
+        return f'{actype}-{fixedstr}-{unique_part}'
     
     
-    def uuid_numeric_4():
+    def uuid_numeric_4(self):
         return str(uuid.uuid4().int)[-4:]
