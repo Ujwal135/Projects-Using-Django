@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path,include
-from . import views
+from . import views 
 
 urlpatterns = [
-    path('saving_account/', views.saving_account_home, name='saving_account'),
+    path('open-account/', views.openform, name='open_account_form'),
+    path('saving-account/<int:customer_id>/', views.saving_account, name='saving_account'),
 ]
