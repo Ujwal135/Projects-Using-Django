@@ -3,6 +3,8 @@ from .forms import Customer_Form
 from .models import Customer_information,Account
 import uuid
 from datetime import date
+from.utils import render_to_pdf
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -58,10 +60,20 @@ def account_success(request,account_id):
         'customer': customer
     })
     
-
-# def generate_account_number(account_type):
-#     prefix = 'SAV' if account_type == 'SAV' else 'CUR'
-#     keyword = 'SUPR' 
-#     unique = str(uuid.uuid4().int)[-6:]
-
-#     return f'{prefix}-{keyword}-{unique}'
+    
+def passbook_pdf(request,account_id):
+    account = Account.objects.get(id=account_id)
+    customer = account.customer
+   
+    params = {
+       'account':account,
+       'customer':customer
+   }
+    
+    pdf = render_to_pdf('accounts/passbook.html',params)
+    print(type(pdf)) 
+    
+    if pdf is None:
+        return HttpResponse("PDF generation failed", status=500)
+    
+    return HttpResponse(pdf, content_type='application/pdf')

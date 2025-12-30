@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Passbook</title>
+</head>
+
+<body>
+
+<!-- OUTER BACKGROUND -->
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f3f4f6">
+  <tr>
+    <td align="center">
+
+      <!-- MAIN CONTAINER -->
+      <table width="700" cellpadding="8" cellspacing="0" bgcolor="#ffffff" border="1">
+
+        <!-- HEADER -->
+        <tr bgcolor="#000000">
+          <td>
+            <font color="#60a5fa" size="5"><b>SuperCharge</b></font><br />
+            <font color="#e5e7eb" size="2">Empowering your future</font>
+          </td>
+          <td align="right">
+            <font color="#ffffff" size="2"><b>Passbook</b></font><br />
+            <font color="#d1d5db" size="1">
+              Generated on {{ now|date:"d M Y" }}
+            </font>
+          </td>
+        </tr>
+
+        <!-- ACCOUNT DETAILS -->
+        <tr>
+          <td colspan="2">
+
+            <table width="100%" cellpadding="6" cellspacing="0" border="1">
+
+              <tr bgcolor="#f9fafb">
+                <td>
+                  <font size="2" color="#374151">Account Holder</font><br />
+                  <font size="3" color="#000000">
+                    <b>{{ customer.first_name }} {{ customer.last_name }}</b>
+                  </font>
+                </td>
+                <td>
+                  <font size="2" color="#374151">Email</font><br />
+                  <font size="3" color="#000000">
+                    <b>{{ customer.email_id }}</b>
+                  </font>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <font size="2" color="#374151">Mobile Number</font><br />
+                  <font size="3" color="#000000">
+                    <b>{{ customer.mobile }}</b>
+                  </font>
+                </td>
+                <td>
+                  <font size="2" color="#374151">Account Number</font><br />
+                  <font size="3" color="#000000">
+                    <b>{{ account.account_number }}</b>
+                  </font>
+                </td>
+              </tr>
+
+              <tr bgcolor="#f9fafb">
+                <td>
+                  <font size="2" color="#374151">Account Type</font><br />
+                  <font size="3" color="#000000">
+                    <b>{{ account.account_type }}</b>
+                  </font>
+                </td>
+                <td>
+                  <font size="2" color="#374151">Current Balance</font><br />
+                  <font size="4" color="#16a34a">
+                    <b>₹ {{ account.balance }}</b>
+                  </font>
+                </td>
+              </tr>
+
+            </table>
+
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr bgcolor="#f9fafb">
+          <td colspan="2" align="center">
+            <font size="1" color="#6b7280">
+              This is a system-generated passbook. No signature required.
+            </font>
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
