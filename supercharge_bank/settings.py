@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tailwind' ,
     'theme',
     'accounts',
+    'internetBanking',
 ]
 
 TAILWIND_APP_NAME = 'theme'

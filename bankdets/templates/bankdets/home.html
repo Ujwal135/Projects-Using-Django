@@ -24,55 +24,64 @@
 
     {% tailwind_css %}
 </head>
-<body style="font-family: 'Unbounded', sans-serif" class='bg-[radial-gradient(circle,_#031f51,_#051f4b,_#081f45,_#0c1f3e,_#101f38,_#161c31,_#18192a,_#191724,_#18121b,_#140c13,_#0d0609,_#000000)] min-h-screen text-amber-50 font-brand scroll-smooth '>
+<body style="font-family: 'Unbounded', sans-serif" class='overflow-x-hidden bg-[radial-gradient(circle,_#031f51,_#051f4b,_#081f45,_#0c1f3e,_#101f38,_#161c31,_#18192a,_#191724,_#18121b,_#140c13,_#0d0609,_#000000)] min-h-screen text-amber-50 font-brand scroll-smooth '>
     <header class=' w-full'>
-        <nav class = "flex w-full items-center justify-between px-6 py-4 ">
-            <div class='my-1 mx-1'>
-                    <a href="#" class='text-3xl font-bold text-[#F0F8FB]'>SuperCharge.</a>
-            </div>
+        <nav class="flex items-center justify-between px-4 py-4 max-w-7xl mx-auto">
+  
+  <!-- Logo -->
+  <a href="#" class="text-2xl sm:text-3xl font-bold text-[#F0F8FB]">
+    SuperCharge.
+  </a>
 
-            <ul class="flex gap-6 font-bold ">
-                <li><a href="" class="hover:text-[#3b82f6]">Home</a></li>
-                <li><a href="" class="hover:text-[#3b82f6]">About-us</a></li>
-                <li><a href="" class="hover:text-[#3b82f6]">Banking</a></li>
-                <li><a href="" class="hover:text-[#3b82f6]">Contact-us</a></li>
-                <li><a href="" class="hover:text-[#3b82f6]">Explore</a></li>
-            </ul>
+  <!-- Desktop Menu -->
+  <ul class="hidden md:flex gap-6 font-bold">
+    <li><a href="#" class="hover:text-[#3b82f6]">Home</a></li>
+    <li><a href="#" class="hover:text-[#3b82f6]">About</a></li>
+    <li><a href="#" class="hover:text-[#3b82f6]">Banking</a></li>
+    <li><a href="#" class="hover:text-[#3b82f6]">Contact</a></li>
+    <li><a href="#" class="hover:text-[#3b82f6]">Explore</a></li>
+  </ul>
 
-            <ul class="flex gap-3.5 font-bold ">
-                <li><a href="" class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-amber-50 hover:text-black transition">Login</a></li>
-                <li><a class="px-4 py-1.5 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition" href="">Sign-up</a></li>
-            </ul>
-        </nav>
+  <!-- Desktop Buttons -->
+  <div class="hidden md:flex gap-3 font-bold">
+    <a href="#" class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-amber-50 hover:text-black transition">
+      Login
+    </a>
+    <a href="#" class="px-4 py-1.5 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition">
+      Sign-up
+    </a>
+  </div>
+
+  <!-- Mobile Menu Icon -->
+  <button class="md:hidden text-3xl">☰</button>
+</nav>
+
     </header>
 <main>
 
-    <div class="mt-20 px-6 text-center">
-      <div class="text-center">
-        <h1 class="text-6xl font-bold mb-4 transition-all duration-700 opacity-0 animate-[fadeIn_1s_ease-out_forwards]">
-          Welcome to
-        </h1>
+<div class="mt-20 px-4 text-center">
+  <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 animate-[fadeIn_1s_ease-out_forwards]">
+    Welcome to
+  </h1>
 
-        <h2 class="text-6xl font-bold text-[#3b82f6] transition-all duration-700 opacity-0 animate-[fadeIn_1.2s_ease-out_forwards]">
-          SuperCharge Finance
-        </h2>
+  <h2 class="text-3xl sm:text-5xl md:text-6xl font-bold text-[#3b82f6] animate-[fadeIn_1.2s_ease-out_forwards]">
+    SuperCharge Finance
+  </h2>
 
-        <p class="mt-4 text-lg text-[#94a3b8] transition-all duration-700 opacity-0 animate-[fadeIn_1.4s_ease-out_forwards]">
-          All your financial services in one smart platform.
-        </p>
-      </div>
-    </div>
+  <p class="mt-4 text-base sm:text-lg text-[#94a3b8] max-w-xl mx-auto animate-[fadeIn_1.4s_ease-out_forwards]">
+    All your financial services in one smart platform.
+  </p>
+</div>
 
 
-    <div class=' mt-16 w-6xl justify-self-center border border-[#94a3b8] p-4 rounded-md text-[#94a3b8] transition-all duration-700 opacity-0 animate-[fadeIn_1.4s_ease-out_forwards]'>
-        <h2 class="text-3xl font-bold text-center mb-6">
-            Why Choose SuperCharge..
-        </h2>
-        <p class="text-center text-[#94a3b8] text-lg max-w-3xl mx-auto">
-        We provide secure, fast, and customer-focused banking solutions designed
-        to make your financial life simple and stress-free.
-        </p>
-    </div>
+ <div class="mt-16 max-w-6xl mx-auto border border-[#94a3b8] p-6 rounded-md text-center">
+  <h2 class="text-2xl sm:text-3xl font-bold mb-4">
+    Why Choose SuperCharge
+  </h2>
+  <p class="text-[#94a3b8] text-base sm:text-lg max-w-3xl mx-auto">
+    Secure, fast, and customer-focused banking solutions designed to simplify your life.
+  </p>
+</div>
 
     <div class="justify-self-center transition-all duration-700 opacity-0 animate-[fadeIn_1.4s_ease-out_forwards]">
         <h1 class=" text-5xl mt-10"> Explore Our Services </h1>
@@ -121,11 +130,11 @@
     </div>
   </div>
 
-  <h1 class=" text-4xl mt-20 px-6 text-center ">Top Features of SuperCharge Savings A/c</h1>
+  <h1 class=" text-2xl sm:text-4xl mt-20 px-4 text-center ">Top Features of SuperCharge Savings A/c</h1>
 
- <div class="max-w-5xl mx-auto px-6 py-18">
+ <div class="max-w-5xl mx-auto px-4 py-16">
 
-   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     
     <!-- Card 1 -->
     <div class="bg-gray-800  text-white rounded-2xl p-6">
@@ -176,11 +185,11 @@
    </div>
  </div>
 
-<footer>
-  <div class="flex items-center justify-between px-8 py-4 max-w-6xl mx-auto">
-    <div class="max-w-6xl">
-      <h1 class="text-4xl text-[#3b82f6]"> SuperCharge</h1>
-      <p class=" text-sm text-[#94a3b8] pl-20.5" > Empowering your future </p>
+<footer class="mt-20">
+  <div class="flex flex-col md:flex-row items-center justify-between px-4 py-6 max-w-6xl mx-auto gap-6">
+    <div class="text-center md:text-left">
+      <h1 class="text-3xl text-[#3b82f6]"> SuperCharge</h1>
+      <p class=" text-sm text-[#94a3b8] mt-2" > Empowering your future </p>
     </div>
     
     <div class="flex items-center gap-4">

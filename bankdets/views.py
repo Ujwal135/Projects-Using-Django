@@ -6,7 +6,7 @@ from django.shortcuts import render
 def home(request):
     services = [
         {"title": "Accounts", "desc": "Open your Saving account at 0 balance", "icon": "💰","name":'account'},
-        {"title": "Loans", "desc": "Quick loan approvals", "icon": "🏦","name":'loan'},
+        {"title": "Internet-Banking", "desc": "Quick money transfer and many more services", "icon": "🏦","name":'internetBanking'},
         {"title": "Cards", "desc": "Debit and credit cards", "icon": "💳","name":'cards'},
         {"title": "Insurance", "desc": "Life & health coverage", "icon": "🛡️","name":'insurance'},
         {"title": "Investments", "desc": "Grow your wealth", "icon": "📈","name":'investments'},
@@ -23,8 +23,8 @@ def home(request):
 def account(request):
     return render(request,'bankdets/account.html')
 
-def loan(request):
-    return render(request,'bankdets/account.html')
+def internetBanking(request):
+    return render(request,'internetBanking/loginpage.html')
 
 def cards(request):
     return render(request,'bankdets/account.html')
