@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Customer_information,Account
+from accounts.models import Customer_information,Account
+
 
 
 # Register your models here.

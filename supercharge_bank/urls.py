@@ -8,7 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('',include("bankdets.urls")),
     path('accounts/',include('accounts.urls')),
-    path('internaetBanking/',include('internetBanking.urls')),
+    path('/internetBanking/',include('internetBanking.urls')),
     path('admin/', admin.site.urls),
 ]
 

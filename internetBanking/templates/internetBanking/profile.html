@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4 text-blue-600">My Profile</h2>
+
+    {% if customer %}
+        <p><strong>Customer ID:</strong> {{ customer.customer_id }}</p>
+        <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
+        <p><strong>Gender:</strong> {{ customer.gender }}</p>
+        <p><strong>Email:</strong> {{ customer.email_id }}</p>
+        <p><strong>Mobile:</strong> {{ customer.mobile }}</p>
+        <p><strong>Address:</strong> {{ customer.address }}, {{ customer.pincode }}</p>
+        <p><strong>Date of Birth:</strong> {{ customer.date_of_birth }}</p>
+        <p><strong>Aadhar No:</strong> {{ customer.aadhar_no }}</p>
+
+        <h3 class="mt-4 font-semibold">Accounts:</h3>
+        <ul class="list-disc list-inside">
+            {% for account in accounts %}
+                <li>{{ account.account_type }} - {{ account.account_number }} (Balance: ₹{{ account.balance }})</li>
+            {% empty %}
+                <li>No accounts found</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No customer data found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

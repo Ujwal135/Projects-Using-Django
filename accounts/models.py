@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -78,3 +79,9 @@ class Account(models.Model):
     
     def uuid_numeric_4(self):
         return str(uuid.uuid4().int)[-4:]
+    
+    
+    
+# internet banking model 
+
+

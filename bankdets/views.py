@@ -24,7 +24,7 @@ def account(request):
     return render(request,'bankdets/account.html')
 
 def internetBanking(request):
-    return render(request,'internetBanking/loginpage.html')
+    return render(request,'internetBanking/homeloginpage.html')
 
 def cards(request):
     return render(request,'bankdets/account.html')
