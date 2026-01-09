@@ -1,37 +1,334 @@
+
+
+{% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <title>My Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <title>SuperCharge Internet Banking</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
+  {% tailwind_css %}
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 p-6">
 
-<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold mb-4 text-blue-600">My Profile</h2>
+  <body class="overflow-x-hidden min-h-screen text-amber-50
+  bg-[radial-gradient(circle,_#031f51,_#051f4b,_#081f45,_#0c1f3e,_#101f38,_#161c31,_#18192a,_#191724,_#18121b,_#140c13,_#0d0609,_#000000)]
+  font-[Unbounded]">
 
-    {% if customer %}
-        <p><strong>Customer ID:</strong> {{ customer.customer_id }}</p>
-        <p><strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}</p>
-        <p><strong>Gender:</strong> {{ customer.gender }}</p>
-        <p><strong>Email:</strong> {{ customer.email_id }}</p>
-        <p><strong>Mobile:</strong> {{ customer.mobile }}</p>
-        <p><strong>Address:</strong> {{ customer.address }}, {{ customer.pincode }}</p>
-        <p><strong>Date of Birth:</strong> {{ customer.date_of_birth }}</p>
-        <p><strong>Aadhar No:</strong> {{ customer.aadhar_no }}</p>
+  <!-- ================= HEADER ================= -->
+  <header class="w-full">
+    <nav class="w-full px-6 py-4">
+    <div class="flex items-center justify-between">
 
-        <h3 class="mt-4 font-semibold">Accounts:</h3>
-        <ul class="list-disc list-inside">
-            {% for account in accounts %}
-                <li>{{ account.account_type }} - {{ account.account_number }} (Balance: ₹{{ account.balance }})</li>
-            {% empty %}
-                <li>No accounts found</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No customer data found.</p>
-    {% endif %}
+      <!-- Left: Logo -->
+      <a href="#" class="text-2xl md:text-3xl font-bold text-[#F0F8FB]">
+        SuperCharge
+      </a>
+
+      <!-- Center: Menu (Desktop only) -->
+      <ul class="hidden md:flex gap-8 font-bold text-[#F0F8FB]">
+        <li><a href="{% url 'home' %}" class="hover:text-blue-400">Home</a></li>
+        <li><a href="#" class="hover:text-blue-400">About</a></li>
+        <li><a href="#" class="hover:text-blue-400">Banking</a></li>
+        <li><a href="#" class="hover:text-blue-400">Contact</a></li>
+      </ul>
+
+      <!-- Right: Auth Buttons -->
+    <div class="hidden md:flex gap-3">
+      <a class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition" 
+      href="{% url 'loginpage' %}"
+      >Login
+      </a>
+      
+
+      <a class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition" 
+      href="{% url 'register' %}"
+      >Sign-up </a> 
+      </a>
+    </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-white text-2xl">
+        ☰
+      </button>
+
+    </div>
+  </nav>
+  </header>
+
+<nav class="bg-gray-800/50 text-white">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-4">
+
+        <!-- Navbar Row -->
+        <div class="flex justify-between items-center h-16">
+
+            <!-- Logo -->
+            <div class="text-xl font-bold">
+                <a href="">
+                    Services
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6">
+
+                <a href="" class="hover:text-gray-200">
+                    Dashboard
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Profile
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Transactions
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Transfer
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Statements
+                </a>
+
+                <a href="{% url 'logout_banking'%}"
+                   class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">
+                    Logout
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menuBtn"
+                class="md:hidden focus:outline-none">
+                ☰
+            </button>
+
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+
+            <a href="" class="block py-2 border-b">
+                Dashboard
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Profile
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Transactions
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Transfer Money
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Statements
+            </a>
+
+            <a href="{% url 'logout_banking'%}"
+               class="block py-2 text-red-300">
+                Logout
+            </a>
+        </div>
+
+    </div>
+</nav>
+<!-- Welcome Section -->
+<div class="max-w-7xl mx-auto px-4 mt-6">
+
+    <div class="bg-800/50 shadow-sm rounded-lg p-4 sm:p-6
+                flex flex-col sm:flex-row
+                items-start sm:items-center
+                justify-between">
+
+        <!-- Welcome Text -->
+        <div>
+            <h2 class="text-xl sm:text-2xl font-semibold text-[#ffff]">
+                Welcome , {{ customer.first_name|capfirst }} {{ customer.last_name|capfirst }}👋
+            </h2>
+
+            <p class="text-[#ffff] mt-1">
+                Welcome to our Internet Banking portal.
+            </p>
+        </div>
+
+        <!-- Date / Status -->
+        <div class="mt-4 sm:mt-0 text-sm text-[#ffff]">
+            Secure • Fast • Reliable
+        </div>
+
+    </div>
+
 </div>
+<div class="max-w-7xl mx-auto px-4 py-8">
 
-</body>
-</html>
+  <!-- MAIN GRID -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- ================= LEFT : PROFILE ================= -->
+    <div class="lg:col-span-1">
+
+      <div class="bg-gray-800/50 rounded-xl shadow-md p-6">
+
+        <!-- Top Section -->
+        <div class="flex flex-col items-center gap-4">
+
+          <!-- User Info -->
+          <div class="text-center">
+            <h2 class="text-2xl font-bold text-white">
+              {{ customer.first_name|capfirst }} {{ customer.last_name|capfirst }}
+            </h2>
+
+            <p class="text-white mt-1">
+              {{ customer.email_id }}
+            </p>
+
+            <p class="mt-2 text-sm text-white">
+              Account Holder
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Divider -->
+        <hr class="my-6 border-gray-600">
+
+        <!-- Details -->
+        <div class="space-y-6">
+
+          <!-- Personal -->
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-3">
+              Personal Details
+            </h3>
+
+            <p class="text-white mb-2">
+              <span class="font-medium">Username:</span> {{ request.user.username }}
+            </p>
+
+            <p class="text-white mb-2">
+              <span class="font-medium">Email:</span> {{ customer.email_id }}
+            </p>
+
+            <p class="text-white mb-2">
+              <span class="font-medium">Joined:</span>
+              {{ request.user.date_joined|date:"d M Y" }}
+            </p>
+          </div>
+
+          <!-- Banking -->
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-3">
+              Banking Info
+            </h3>
+
+            {% for account in accounts %}
+              <p class="text-white mb-2">
+                <span class="font-medium">Account Number:</span>
+                {{ account.account_number }}
+              </p>
+
+              <p class="text-white mb-2">
+                <span class="font-medium">Account Type:</span>
+                {{ account.account_type }}
+              </p>
+
+              <p class="text-white mb-2">
+                <span class="font-medium">Balance:</span>
+                ₹ {{ account.balance }}
+              </p>
+            {% endfor %}
+          </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-8 flex flex-col gap-3">
+          <a href="#"
+             class="text-center bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+            Edit Profile
+          </a>
+
+          <a href="#"
+             class="text-center bg-gray-200 text-black px-6 py-2 rounded-lg hover:bg-gray-300 transition">
+            Change Password
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= RIGHT : SERVICES ================= -->
+    <div class="lg:col-span-2">
+
+      <!-- Heading -->
+      <div class="mb-10 text-center lg:text-left
+           transition-all duration-700 opacity-0
+           animate-[fadeIn_1.4s_ease-out_forwards]">
+        <h1 class="text-4xl font-bold text-white">
+          Explore Our Services
+        </h1>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+
+        {% for service in services %}
+        <div
+          class="group w-full h-64 border border-gray-600 rounded-xl p-6 text-center
+                 flex flex-col justify-between transition-all duration-300
+                 hover:shadow-xl hover:-translate-y-2 hover:border-[#3b82f6]
+                 animate-fadeUp"
+          style="animation-delay: {{ service.delay }}s;">
+
+          <!-- Icon -->
+          <div class="flex justify-center">
+            <div class="w-14 h-14 bg-blue-100 text-[#3b82f6] rounded-full
+                        flex items-center justify-center text-2xl font-bold">
+              {{ service.icon|default:"₹" }}
+            </div>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-xl font-semibold mt-4 text-white">
+            {{ service.title }}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-[#94a3b8] text-sm mt-2">
+            {{ service.desc }}
+          </p>
+
+          <!-- CTA -->
+          <a href=""
+             class="text-[#3b82f6] font-medium mt-4 inline-block
+                    group-hover:underline">
+            Learn More →
+          </a>
+
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </div>
+</div>

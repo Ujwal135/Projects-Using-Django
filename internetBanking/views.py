@@ -5,7 +5,7 @@ from .models import InternetBanking
 from django.contrib import messages
 from django.db import transaction
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from internetBanking.models import InternetBanking
@@ -125,7 +125,58 @@ def profile(request):
         print(e)
         return redirect('loginpage')
     
+    services = [
+        {
+            "title": "Bank to Bank Transfer",
+            "desc": "Transfer money securely to other banks",
+            "icon": "🔁",
+            "name": "bank_transfer"
+        },
+        {
+            "title": "Credit Amount",
+            "desc": "Deposit money into your account",
+            "icon": "➕",
+            "name": "credit_amount"
+        },
+        {
+            "title": "Debit Amount",
+            "desc": "Withdraw money from your account",
+            "icon": "➖",
+            "name": "debit_amount"
+        },
+        {
+            "title": "Transaction History",
+            "desc": "View all your transactions",
+            "icon": "📜",
+            "name": "transactions"
+        },
+        {
+            "title": "Account Balance",
+            "desc": "Check available balance",
+            "icon": "💰",
+            "name": "account_balance"
+        },
+        {
+            "title": "Download Statement",
+            "desc": "Download bank statement (PDF)",
+            "icon": "📄",
+            "name": "bank_statement"
+        },
+    ]
+
+    # animation delay
+    for i, service in enumerate(services):
+        service["delay"] = round(i * 0.15, 2)
+
+    
     return render(request,'internetBanking/profile.html' ,{
         'customer': customer,
-        'accounts': accounts
+        'accounts': accounts,
+        'services':services
     })
+    
+def logout_banking(request):
+        logout(request)
+        return redirect('loginpage')
+    
+    
