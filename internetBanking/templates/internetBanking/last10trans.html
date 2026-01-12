@@ -85,23 +85,23 @@
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-6">
 
-                <a href="" class="hover:text-gray-200">
+                <a href="{% url 'profile'%}" class="hover:text-gray-200">
                     Dashboard
                 </a>
 
-                <a href="" class="hover:text-gray-200">
+                <a href="{% url 'profile'%}" class="hover:text-gray-200">
                     Profile
                 </a>
 
-                <a href="" class="hover:text-gray-200">
+                <a href="{% url 'transactions'%}" class="hover:text-gray-200">
                     Transactions
                 </a>
 
-                <a href="" class="hover:text-gray-200">
+                <a href="{% url 'bank_transfer'%}" class="hover:text-gray-200">
                     Transfer
                 </a>
 
-                <a href="" class="hover:text-gray-200">
+                <a href="{% url 'bank_statement'%}" class="hover:text-gray-200">
                     Statements
                 </a>
 
@@ -122,23 +122,23 @@
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden pb-4">
 
-            <a href="" class="block py-2 border-b">
+            <a href="{% url 'profile'%}" class="block py-2 border-b">
                 Dashboard
             </a>
 
-            <a href="" class="block py-2 border-b">
+            <a href="{% url 'profile'%}" class="block py-2 border-b">
                 Profile
             </a>
 
-            <a href="" class="block py-2 border-b">
+            <a href="{% url 'transactions'%}" class="block py-2 border-b">
                 Transactions
             </a>
 
-            <a href="" class="block py-2 border-b">
+            <a href="{% url 'bank_transfer'%}" class="block py-2 border-b">
                 Transfer Money
             </a>
 
-            <a href="" class="block py-2 border-b">
+            <a href="{% url 'bank_statement'%}" class="block py-2 border-b">
                 Statements
             </a>
 
@@ -150,6 +150,7 @@
 
     </div>
 </nav>
+
 
 <!-- ================= HERO ================= -->
 <section class="mt-20 px-4 text-center">

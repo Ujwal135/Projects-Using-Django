@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import InternetBankingRegisterUser,Banktobanktransfer
+from .forms import InternetBankingRegisterUser,Banktobanktransfer,Creditamountform
 from accounts.models import Customer_information,Account
 from .models import InternetBanking
 from django.contrib import messages
@@ -10,7 +10,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from internetBanking.models import InternetBanking,Ibtransactions
 from django.views.decorators.csrf import csrf_exempt
-
+import qrcode as qrcode
+from decimal import Decimal 
 
 
 
@@ -173,15 +174,53 @@ def logout_banking(request):
         logout(request)
         return redirect('loginpage')
     
-    
+@login_required(login_url='login')
 def credit_and_debit(request):
-    return render(request,"internetBanking/credit_and_debit.html")
+    
+    form = Creditamountform(request.POST)
+    if request.method == "POST":
+        
+        if form.is_valid():
+        
+        
+            internet_banking = InternetBanking.objects.get(user = request.user)
+            customer = internet_banking.customer
+            amount = form.cleaned_data["amount"]
+            amount = Decimal(amount)
+            self_account = Account.objects.filter(customer = customer).first()
+            
+            # QR GEN
+            data = f"user_id={customer.id}& type=credit"
+            
+            qr = qrcode.make(data)
+            qr_path = f'media/{customer.id}.png'
+            qr.save(qr_path)
+            
+             
+            with transaction.atomic():
+                self_account.balance += amount
+                self_account.save()
+
+            # Sender transaction
+            Ibtransactions.objects.create(
+                user=request.user,
+                transaction_type='CR',
+                receiver_account="self_online ",
+                sender_account="self_online",
+                amount=amount,
+                balance_after=self_account.balance,
+                remark="Credited")
+            
+            messages.success(request, "Amount credited successfully")
+            return redirect("profile")
+
+    return render(request, "internetBanking/credit_and_debit.html",{"qr_path":qr_path})
 
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-@csrf_exempt
+
 @login_required(login_url='login')
 def banktobanktransfer(request):
 
@@ -277,11 +316,12 @@ def banktobanktransfer(request):
 
     
 
-def transaction_list(request):
+def transaction_list(request):  
+    
     return render(request,"internetBanking/last10trans.html")
 
 def account_dets(request):
     return render(request,"internetBanking/profile.html")
 
 def bank_statement(request):
-    return render(request,"internetBanking/statement.html")
+    return render(request,"internetBanking/statemen.html")

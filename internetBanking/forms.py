@@ -47,9 +47,6 @@ class InternetBankingRegisterUser(forms.Form):
 
         return cleaned_data
 
-
-
-
 class Banktobanktransfer(forms.Form):
     
     account_number = forms.CharField(
@@ -112,3 +109,14 @@ class Banktobanktransfer(forms.Form):
             raise forms.ValidationError("Mobile number must be 10 digits")
 
         return mobile
+    
+    
+class Creditamountform(forms.Form):
+    amount = forms.IntegerField(
+    min_value=1,
+    label="Amount",
+    widget=forms.NumberInput(attrs={
+        "class": "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+        "placeholder": "Enter amount"
+    })
+)

@@ -134,4 +134,4 @@ STATICFILES_DIR = {
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'public/static')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
