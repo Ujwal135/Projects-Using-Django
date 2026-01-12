@@ -5,6 +5,7 @@ from accounts.models import Customer_information
 from django.utils import timezone
 import uuid
 
+
 # internet banking model 
 
 class InternetBanking(models.Model):
@@ -39,6 +40,19 @@ class Ibtransactions(models.Model):
         default=Transaction_types.Debit
     )
     
+    receiver_account = models.CharField(
+        max_length=20
+        )
+    
+    sender_account = models.CharField(
+        max_length=20
+    )
+
+    date_time = models.DateTimeField(
+         auto_now_add=True,
+         
+    )
+    
     transaction_id = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -55,7 +69,8 @@ class Ibtransactions(models.Model):
         decimal_places=2
     )
     
-    date_time = models.DateTimeField(
-         auto_now_add=True
+    remark = models.CharField(
+        max_length=30,
     )
+   
 

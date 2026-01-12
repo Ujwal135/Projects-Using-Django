@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import InternetBankingRegisterUser
+from .forms import InternetBankingRegisterUser,Banktobanktransfer
 from accounts.models import Customer_information,Account
 from .models import InternetBanking
 from django.contrib import messages
@@ -8,23 +8,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from internetBanking.models import InternetBanking
+from internetBanking.models import InternetBanking,Ibtransactions
+from django.views.decorators.csrf import csrf_exempt
 
-@login_required(login_url='login')
-def profile(request):
-    # Try to get the customer linked to logged-in user
-    try:
-        internet_banking = request.user.internetbanking
-        customer = internet_banking.customer
-        accounts = customer.accounts.all()  # get all accounts
-    except InternetBanking.DoesNotExist:
-        # If user has no internet banking account, redirect to login
-        return redirect('login')
 
-    return render(request, 'internetBanking/profile.html', {
-        'customer': customer,
-        'accounts': accounts
-    })
+
 
 
 
@@ -60,12 +48,16 @@ def register(request):
                 )
                 account = Account.objects.get(
                     customer = customer,
-                    account_number = account_number
+                    account_number = account_number,
                 )
 
                 if InternetBanking.objects.filter(customer=customer).exists():
                     messages.error(request, "Internet banking is already activated")
                     return redirect("loginpage")
+                
+                if Account.objects.filter(customer = customer ,internet_banking_is_active = "N").exists():
+                    messages.error(request,"Internet banking is not activated ,Contact Admin ")
+                    return redirect("register.html")
 
                 if User.objects.filter(username=username).exists():
                     messages.error(request, "Please select a different username")
@@ -76,6 +68,8 @@ def register(request):
                         username=username,
                         password=password
                     )
+                    customer.user = user
+                    customer.save()
                     print("User created:", user.username)
 
                     InternetBanking.objects.create(
@@ -142,7 +136,7 @@ def profile(request):
             "title": "Debit Amount",
             "desc": "Withdraw money from your account",
             "icon": "➖",
-            "name": "debit_amount"
+            "name": "credit_amount"
         },
         {
             "title": "Transaction History",
@@ -180,3 +174,114 @@ def logout_banking(request):
         return redirect('loginpage')
     
     
+def credit_and_debit(request):
+    return render(request,"internetBanking/credit_and_debit.html")
+
+from django.db import transaction
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+@csrf_exempt
+@login_required(login_url='login')
+def banktobanktransfer(request):
+
+    form = Banktobanktransfer(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+
+        # 1️⃣ Get customer linked to logged-in user via InternetBanking
+        try:
+            internet_banking = InternetBanking.objects.get(user=request.user)
+            print(internet_banking)
+            customer = internet_banking.customer
+            print(customer)
+        except InternetBanking.DoesNotExist:
+            messages.error(request, "Internet banking not activated")
+            return redirect("loginpage")
+
+        # 2️⃣ Get sender account (assuming single account per customer)
+        sender_account = Account.objects.filter(customer=customer).first()
+        print(sender_account)
+        if not sender_account:
+            messages.error(request, "No bank account found")
+            return redirect("loginpage")
+
+        receiver_account_no = form.cleaned_data['account_number']
+        confirm_account = form.cleaned_data['confirm_account']
+        amount = form.cleaned_data['amount']
+
+        # 3️⃣ Account number mismatch
+        if receiver_account_no != confirm_account:
+            messages.error(request, "Account number does not match")
+            return render(request, 'internetBanking/btobtrf.html', {'form': form})
+
+        # 4️⃣ Get receiver account
+        try:
+            receiver_account = Account.objects.get(account_number=receiver_account_no)
+        except Account.DoesNotExist:
+            messages.error(request, "Receiver account not found")
+            return render(request, 'internetBanking/btobtrf.html', {'form': form})
+
+        # 5️⃣ Insufficient balance
+        if sender_account.balance < amount:
+            messages.error(request, "Insufficient balance")
+
+            Ibtransactions.objects.create(
+                user=request.user,
+                transaction_type='DBT',
+                receiver_account=receiver_account_no,
+                sender_account=sender_account.account_number,
+                amount=amount,
+                balance_after=sender_account.balance,
+                remark="Insufficient balance"
+            )
+            return render(request, 'internetBanking/btobtrf.html', {'form': form})
+
+        # 6️⃣ SUCCESS TRANSFER (ATOMIC)
+        with transaction.atomic():
+            sender_account.balance -= amount
+            sender_account.save()
+
+            receiver_account.balance += amount
+            receiver_account.save()
+
+            # Sender transaction
+            Ibtransactions.objects.create(
+                user=request.user,
+                transaction_type='DBT',
+                receiver_account=receiver_account.account_number,
+                sender_account=sender_account.account_number,
+                amount=amount,
+                balance_after=sender_account.balance,
+                remark="Transfer success"
+            )
+
+            # Receiver transaction
+            if receiver_account.customer.user:
+                Ibtransactions.objects.create(
+                    user=receiver_account.customer.user,
+                    transaction_type='CR',
+                    receiver_account=receiver_account.account_number,
+                    sender_account=sender_account.account_number,
+                    amount=amount,
+                    balance_after=receiver_account.balance,
+                    remark="Amount received"
+                )
+
+        messages.success(request, "Transfer completed successfully")
+        return redirect('profile')
+
+    return render(request, 'internetBanking/btobtrf.html', {'form': form})
+
+
+
+    
+
+def transaction_list(request):
+    return render(request,"internetBanking/last10trans.html")
+
+def account_dets(request):
+    return render(request,"internetBanking/profile.html")
+
+def bank_statement(request):
+    return render(request,"internetBanking/statement.html")

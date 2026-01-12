@@ -1,16 +1,17 @@
+
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <title>SuperCharge Internet Banking Registration </title>
+  <title>SuperCharge Internet Banking</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+
   {% tailwind_css %}
 
   <style>
@@ -21,59 +22,143 @@
   </style>
 </head>
 
-<body class="overflow-x-hidden min-h-screen text-amber-50
-bg-[radial-gradient(circle,_#031f51,_#051f4b,_#081f45,_#0c1f3e,_#101f38,_#161c31,_#18192a,_#191724,_#18121b,_#140c13,_#0d0609,_#000000)]
-font-[Unbounded]">
+  <body class="overflow-x-hidden min-h-screen text-amber-50
+  bg-[radial-gradient(circle,_#031f51,_#051f4b,_#081f45,_#0c1f3e,_#101f38,_#161c31,_#18192a,_#191724,_#18121b,_#140c13,_#0d0609,_#000000)]
+  font-[Unbounded]">
 
-<!-- ================= HEADER ================= -->
-    <header class=' w-full'>
-      <nav class="w-full px-6 py-4">
-  <div class="flex items-center justify-between">
+  <!-- ================= HEADER ================= -->
+  <header class="w-full">
+    <nav class="w-full px-6 py-4">
+    <div class="flex items-center justify-between">
 
-    <!-- Left: Logo -->
-    <a href="#" class="text-2xl md:text-3xl font-bold text-[#F0F8FB]">
-      SuperCharge
-    </a>
+      <!-- Left: Logo -->
+      <a href="#" class="text-2xl md:text-3xl font-bold text-[#F0F8FB]">
+        SuperCharge
+      </a>
 
-    <!-- Center: Menu (Desktop only) -->
-    <ul class="hidden md:flex gap-8 font-bold text-[#F0F8FB]">
-      <li><a href="{% url 'home' %}" class="hover:text-blue-400">Home</a></li>
-      <li><a href="#" class="hover:text-blue-400">About</a></li>
-      <li><a href="#" class="hover:text-blue-400">Banking</a></li>
-      <li><a href="#" class="hover:text-blue-400">Contact</a></li>
-    </ul>
+      <!-- Center: Menu (Desktop only) -->
+      <ul class="hidden md:flex gap-8 font-bold text-[#F0F8FB]">
+        <li><a href="{% url 'home' %}" class="hover:text-blue-400">Home</a></li>
+        <li><a href="#" class="hover:text-blue-400">About</a></li>
+        <li><a href="#" class="hover:text-blue-400">Banking</a></li>
+        <li><a href="#" class="hover:text-blue-400">Contact</a></li>
+      </ul>
 
-    <!-- Right: Auth Buttons -->
-   <div class="hidden md:flex gap-3">
-    <a class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition" 
-    href="{% url 'loginpage' %}"
-    >Login
-    </a>
-     
+      <!-- Right: Auth Buttons -->
+    <div class="hidden md:flex gap-3">
+      <a class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition" 
+      href="{% url 'loginpage' %}"
+      >Login
+      </a>
+      
 
-    <a class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition" 
-    href="{% url 'register' %}"
-    >Sign-up </a> 
-    </a>
+      <a class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition" 
+      href="{% url 'logout_banking' %}"
+      >Log-out </a> 
+      </a>
     </div>
 
-    <!-- Mobile Menu Button -->
-    <button class="md:hidden text-white text-2xl">
-      ☰
-    </button>
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-white text-2xl">
+        ☰
+      </button>
 
-  </div>
+    </div>
+  </nav>
+  </header>
+
+<nav class="bg-gray-800/50 text-white">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto px-4">
+
+        <!-- Navbar Row -->
+        <div class="flex justify-between items-center h-16">
+
+            <!-- Logo -->
+            <div class="text-xl font-bold">
+                <a href="">
+                    Services
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6">
+
+                <a href="" class="hover:text-gray-200">
+                    Dashboard
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Profile
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Transactions
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Transfer
+                </a>
+
+                <a href="" class="hover:text-gray-200">
+                    Statements
+                </a>
+
+                <a href="{% url 'logout_banking'%}"
+                   class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">
+                    Logout
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menuBtn"
+                class="md:hidden focus:outline-none">
+                ☰
+            </button>
+
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+
+            <a href="" class="block py-2 border-b">
+                Dashboard
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Profile
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Transactions
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Transfer Money
+            </a>
+
+            <a href="" class="block py-2 border-b">
+                Statements
+            </a>
+
+            <a href="{% url 'logout_banking'%}"
+               class="block py-2 text-red-300">
+                Logout
+            </a>
+        </div>
+
+    </div>
 </nav>
-</header>
 
 <!-- ================= HERO ================= -->
 <section class="mt-20 px-4 text-center">
   <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold animate-[fadeIn_1s]">
-    Internet Banking 
+    Welcome to
   </h1>
 
   <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-blue-400 animate-[fadeIn_1.2s]">
-    SuperCharge Finance 
+    SuperCharge Finance
   </h2>
 
   <p class="mt-4 text-gray-300 max-w-xl mx-auto animate-[fadeIn_1.4s]">
@@ -81,115 +166,106 @@ font-[Unbounded]">
   </p>
 </section>
 
-<section class="bg-gray-800/50 ">
-  <div class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
-    
-    <!-- Left Content -->
-<div class="md:w-1/2">
-  <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#3b82f6] mb-6">
-    Internet Banking Registration
-  </h1>
 
-  <p class="text-lg text-[#94a3b8] mb-6">
-    Activate Internet Banking to manage your accounts securely from anywhere.
-    Transfer funds, check balances, and access banking services 24/7 with
-    industry-grade security.
-  </p>
+<div class="max-w-4xl mx-auto px-4 py-8">
 
-  <ul class="list-disc list-inside text-[#94a3b8] space-y-2 mb-6">
-    <li>Register using Customer ID and Account Number</li>
-    <li>Secure login with encrypted credentials</li>
-    <li>Instant access after successful verificati on</li>
-    <li>24/7 account access from any device</li>
-    <li>OTP-based verification for sensitive actions</li>
-  </ul>
-</div>
+  <div class="bg-gray-800/60 rounded-xl shadow-lg p-6 md:p-8">
 
-    
-    <!-- Right Image or Illustration -->
-    <div class="md:w-1/2 flex justify-center">
-      <img src="https://freepngimg.com/thumb/online_banking/165654-banking-pic-digital-png-image-high-quality.png" alt="Saving Account" class="rounded-xl shadow-lg">
-    </div>
-
-  </div>
-</section>
-
-
-
-<!-- ================= ACTION CARDS ================= -->
-
-<!-- ================= FORM SECTION ================= -->
-<section class="mt-24 flex justify-center px-4">
-
-  <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 text-gray-800">
-
-    <!-- Bank Header -->
-    <div class="text-center mb-6">
-      <h1 class="text-2xl font-bold text-blue-700">SuperCharge Bank</h1>
-      <p class="text-gray-500 text-sm">Internet Banking Registration</p>
-    </div>
-
-    <!-- Registration Form -->
-    <form method="POST" action="{% url 'register'%}" class="space-y-4">
+    <h2 class="text-2xl font-bold text-white mb-6">
+      Bank to Bank Transfer
+    </h2>
+      
+    <form method="POST">
       {% csrf_token %}
+      
 
-      <div>
-        <label class="block text-sm font-medium">Customer ID</label>
-        <input type="text" name="customer_id" required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+      <!-- Receiver Details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Account Number -->
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">
+            Receiver Account Number
+          </label>
+          <input type="text" name="account_number" required
+                 class="w-full rounded-lg bg-gray-900 text-white
+                        border border-gray-600 px-4 py-2
+                        focus:outline-none focus:border-blue-500">
+        </div>
+
+        <!-- Confirm Account Number -->
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">
+            Confirm Account Number
+          </label>
+          <input type="text" name="confirm_account" required
+                 class="w-full rounded-lg bg-gray-900 text-white
+                        border border-gray-600 px-4 py-2">
+        </div>
+
+        <!-- Receiver Name -->
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">
+            Receiver Name
+          </label>
+          <input type="text" name="receiver_name" required
+                 class="w-full rounded-lg bg-gray-900 text-white
+                        border border-gray-600 px-4 py-2">
+        </div>
+
+
+        <!-- Mobile -->
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">
+            Receiver Mobile Number
+          </label>
+          <input type="tel" name="mobile"
+                 class="w-full rounded-lg bg-gray-900 text-white
+                        border border-gray-600 px-4 py-2">
+        </div>
+
+        <!-- Customer ID -->
+        <div>
+          <label class="block text-sm text-gray-300 mb-1">
+            Receiver Customer ID (optional)
+          </label>
+          <input type="text" name="customer_id"
+                 class="w-full rounded-lg bg-gray-900 text-white
+                        border border-gray-600 px-4 py-2">
+        </div>
+
       </div>
 
-      <div>
-        <label class="block text-sm font-medium">Account Number</label>
-        <input type="text" name="account_number" required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+      <!-- Amount -->
+      <div class="mt-6">
+        <label class="block text-sm text-gray-300 mb-1">
+          Amount (₹)
+        </label>
+        <input type="number" step="0.01" name="amount" required
+               class="w-full rounded-lg bg-gray-900 text-white
+                      border border-gray-600 px-4 py-2">
       </div>
 
-     <div>
-        <label class="block text-sm font-medium">Mobile Number</label>
-        <input type="text" name="mobile_number"
-             class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+      <!-- Save Beneficiary -->
+      <div class="mt-4 flex items-center gap-2">
+        <input type="checkbox" name="save_beneficiary"
+               class="rounded">
+        <label class="text-sm text-gray-300">
+          Save this beneficiary
+        </label>
       </div>
 
-      <div>
-        <label class="block text-sm font-medium">Username</label>
-        <input type="text" name="username" required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Password</label>
-        <input type="password" name="password" required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium">Confirm Password</label>
-        <input type="password" name="confirm_password" required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-      </div>
-
-      <div class="flex items-start gap-2 text-sm">
-        <input type="checkbox" required class="mt-1">
-        <p>
-          I agree to the <span class="text-blue-600 font-medium">Terms & Conditions</span>
-        </p>
-      </div>
-
+      <!-- Submit -->
+      <div class="mt-6">
         <button type="submit"
-            class="w-full bg-blue-700 text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition">
-            Register
+                class="w-full bg-blue-600 hover:bg-blue-700
+                       text-white font-semibold py-2 rounded-lg
+                       transition">
+          Proceed to Transfer
         </button>
+      </div>
+
     </form>
-
-    <div class="text-center mt-6 text-sm">
-      Already registered?
-      <a href="{% url 'loginpage' %}" class="text-blue-600 font-medium hover:underline">
-        Login here
-      </a>
-    </div>
-
-  </div>
 
 {% if messages %}
   <div class="space-y-3 mb-4">
@@ -210,9 +286,13 @@ font-[Unbounded]">
       </div>
     {% endfor %}
   </div>
+  
 {% endif %}
 
-</section>
+</div>
+
+
+<!-- footer -->
 
 <footer class=" mt-24">
   <div class="flex flex-col md:flex-row items-center justify-between gap-6 px-6 py-4 max-w-6xl mx-auto text-center md:text-left">
@@ -247,6 +327,5 @@ font-[Unbounded]">
   </div>
   
 </footer>
-
 </body>
 </html>

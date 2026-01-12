@@ -11,6 +11,13 @@ class Customer_information(models.Model):
         ("male","Male"),
         ("female","Female")
     )
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='customer',
+         null=True,
+         blank=True
+    )
     customer_id = models.CharField(max_length=20, unique=True,blank=True)
     first_name = models.CharField( max_length=50)
     last_name = models.CharField(max_length=50)
@@ -50,15 +57,41 @@ class Account(models.Model):
         SAVINGS = 'savings', 'Savings'
         CURRENT = 'current', 'Current'
         
+    class Internet(models.TextChoices):
+        YES = 'Y','y'
+        NO = 'N','n'
     
-    customer = models.ForeignKey(Customer_information,
+    customer = models.ForeignKey(
+                                Customer_information,
                                  on_delete=models.CASCADE,
-                                 related_name='accounts')
-    account_number = models.CharField(max_length=20,editable=False,unique=True)
-    account_type = models.CharField(max_length=25,choices=ACCOUNTTYPE,default=ACCOUNTTYPE.SAVINGS)
-    balance = models.DecimalField(max_digits=12,decimal_places=2,default=0)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+                                 related_name='accounts'
+                                 )
+    
+    account_number = models.CharField(
+                                max_length=20,
+                                editable=False,
+                                unique=True
+                                )
+    
+    account_type = models.CharField(
+                                    max_length=25,
+                                    choices=ACCOUNTTYPE,
+                                    default=ACCOUNTTYPE.SAVINGS
+                                    )
+    
+    balance = models.DecimalField(
+                                max_digits=12,
+                                decimal_places=2,
+                                default=0
+                                )
+    internet_banking_is_active = models.CharField(
+                                max_length=10,
+                                choices=Internet,
+                                default=Internet.YES,
+                                null=True)
+    
+    created_at = models.DateTimeField(
+                                auto_now_add=True)
 
     
     def __str__(self):
@@ -82,6 +115,6 @@ class Account(models.Model):
     
     
     
-# internet banking model 
+# internet banking model on ---> internet backing app module
 
 

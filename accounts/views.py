@@ -39,10 +39,11 @@ def create_account(request,customer_id):
     
     if request.method == 'POST':
         account_type = request.POST.get('account_type')
-        
+        internet_banking_activate = request.POST.get('internet_banking_activate')
         account = Account.objects.create(
             customer = customer,
             account_type=account_type,
+            internet_banking_is_active = internet_banking_activate,
             # account_number = generate_account_number(account_type)
             balance = 0
         )

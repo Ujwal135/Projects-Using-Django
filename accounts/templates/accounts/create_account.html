@@ -107,7 +107,7 @@
     <form method="POST">
       {% csrf_token %}
 
-      <div class="mb-6">
+      <div class="mb-6 space-y-4">
         <label class="block text-slate-300 mb-2 font-medium">
           Select Account Type
         </label>
@@ -119,6 +119,15 @@
           <option value="SAV">Saving Account</option>
           <option value="CUR">Current Account</option>
         </select>
+
+        <select name="internet_banking_activate"
+                required
+                class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value=""> -- Internet Banking  --</option>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+
       </div>
 
       <!-- Info Note -->
