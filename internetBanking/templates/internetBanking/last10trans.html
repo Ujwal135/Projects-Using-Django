@@ -169,6 +169,80 @@
 
 
 
+<div class="max-w-7xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-700">
+        All the Transactions.
+    </h2>
+
+    <div class="overflow-x-auto overflow-y-auto max-h-[420px] scroll-smooth">
+        <table class="min-w-full border border-gray-200 rounded-lg">
+            <thead class="bg-gray-700 sticky top-0 z-10">
+                <tr>
+                    <th class="px-4 py-2 border">Date</th>
+                    <th class="px-4 py-2 border">Txn ID</th>
+                    <th class="px-4 py-2 border">Type</th>
+                    <th class="px-4 py-2 border">Sender</th>
+                    <th class="px-4 py-2 border">Receiver</th>
+                    <th class="px-4 py-2 border">Amount</th>
+                    <th class="px-4 py-2 border">Balance</th>
+                    <th class="px-4 py-2 border">Remark</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for t in get_of_transactions %}
+                <tr class="text-center hover:bg-gray-50 text-gray-800">
+                    <td class="px-3 py-2 border">
+                        {{ t.date_time|date:"d M Y H:i" }}
+                    </td>
+
+                    <td class="px-3 py-2 border text-xs">
+                        {{ t.transaction_id }}
+                    </td>
+
+                    <td class="px-3 py-2 border">
+                        {% if t.transaction_type == "DBT" %}
+                            <span class="text-red-600 font-semibold">Debit</span>
+                        {% else %}
+                            <span class="text-green-600 font-semibold">Credit</span>
+                        {% endif %}
+                    </td>
+
+                    <td class="px-3 py-2 border">
+                        {{ t.sender_account }}
+                    </td>
+
+                    <td class="px-3 py-2 border">
+                        {{ t.receiver_account }}
+                    </td>
+
+                    <td class="px-3 py-2 border font-medium">
+                        ₹ {{ t.amount }}
+                    </td>
+
+                    <td class="px-3 py-2 border">
+                        ₹ {{ t.balance_after }}
+                    </td>
+
+                    <td class="px-3 py-2 border">
+                        {{ t.remark }}
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center py-6 text-gray-500">
+                        No transactions found
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
 
 
 <!-- footer -->

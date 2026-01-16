@@ -176,6 +176,7 @@ def logout_banking(request):
     
 @login_required(login_url='login')
 def credit_and_debit(request):
+    qr_path =None
     
     form = Creditamountform(request.POST)
     if request.method == "POST":
@@ -315,13 +316,28 @@ def banktobanktransfer(request):
 
 
     
-
+@login_required(login_url='login')
 def transaction_list(request):  
     
-    return render(request,"internetBanking/last10trans.html")
+    get_of_transactions = Ibtransactions.objects.filter(user = request.user).order_by('-date_time')[:10]
+    
+    print(get_of_transactions)
+   
+    
+    return render(request,"internetBanking/last10trans.html",{'get_of_transactions':get_of_transactions})
 
 def account_dets(request):
     return render(request,"internetBanking/profile.html")
 
+
+
+@login_required(login_url='login')
 def bank_statement(request):
-    return render(request,"internetBanking/statemen.html")
+    
+        
+    get_of_transactions = Ibtransactions.objects.filter(user = request.user)
+    
+    print(get_of_transactions)
+   
+    
+    return render(request,"internetBanking/last10trans.html",{'get_of_transactions':get_of_transactions})
