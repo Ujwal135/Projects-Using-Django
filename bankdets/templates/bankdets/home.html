@@ -44,15 +44,17 @@
 
     <!-- Right: Auth Buttons -->
      <div class="hidden md:flex gap-3">
-      <button onclick="showLogin()"
-        class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition">
-        Login
-      </button>
 
-      <button onclick="showRegister()"
-        class="px-4 py-1.5 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition">
-        Sign-up
-      </button>
+      <a href = "{% url 'internetBanking' %}",
+         class="px-4 py-1.5 rounded-full border border-amber-200/40 hover:bg-white hover:text-black transition">
+         Login
+      </a>
+     
+      <a href="{% url 'internetBanking' %}",
+         class="px-4 py-1.5 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition">
+         Sign-up
+       </a>
+
     </div>
 
     <!-- Mobile Menu Button -->
